@@ -1,0 +1,6 @@
+Options -Indexes
+RewriteBase /LdC2014
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?page=$1 [NC,L]
