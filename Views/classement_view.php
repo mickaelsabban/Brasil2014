@@ -1,81 +1,52 @@
-<?php
-	/*session_start();
-	//recup des variables de session
-	include "Module/loadsessionvars.php";
-	include "Module/functioneuro2012.php";
-	include "Module/security.php";
-
-	check_user($parieur_id);
-
-	$classementtransposetable = array_keys($totaljoueurpoints);
-	include "header.php";*/
-?>
-<div class="container-table">
- 	<div class="container-table1">
-		<div class="top-table gradient-greytoblack radius" >Classement</div>
-		
-		<div class="row-table">
-			<div class="cell-classement">Place</div>
-			<div class="cell-classement-gde">Nom</div>
-			<div class="cell-classement-gde">Total Pts</div>
-			<div class="cell-classement-double2">Bons pronostics</div>
-			<div class="cell-classement-double2">Scores exacts</div>
-			<div class="cell-classement-double">Bonus</div>
-			<div class="cell-classement-double">Bonus</div>
-		</div><!-- end div row table-->
-		<div class="row-table">
-			<div class="cell-classement"></div>
-			<div class="cell-classement-gde"></div>
-			<div class="cell-classement-gde"></div>
-			<div class="cell-classement">Nb</div>
-			<div class="cell-classement-gde">Pts</div>
-			<div class="cell-classement">Nb</div>
-			<div class="cell-classement-gde">Pts</div>
-			<div class="cell-classement-double">Meilleur butteur</div>
-			<div class="cell-classement-double">Equipe gagnante</div>
-		</div><!-- end div row table-->
-
-		<?php 
-		foreach($sortedtotalpoints as $parieur_id=>$totalpoint){ ?>
-		
-		<div class='row-table'>			
-			<div class="cell-classement"><?php $rank +=1; echo $rank?></div>
-			<div class="cell-classement-gde"><?php echo $parieurs[$parieur_id]->nom_parieur; ?></div>
-			<div class="cell-classement-gde"><?php echo $totalpoint." pts"; ?></div>	
-			<div class="cell-classement"><?php echo $csens[$parieur_id]; ?></div>
-			<div class="cell-classement-gde"><?php echo $psens[$parieur_id]; ?> pts</div>
-			<div class="cell-classement"><?php echo $cscore[$parieur_id]; ?></div>
-			<div class="cell-classement-gde"><?php echo $pscore[$parieur_id]; ?> pts</div>
-			<div class="cell-classement-gde"><?php echo $paris[$parieur_id]->winner; ?></div>
-			<div class="cell-classement-gde"><?php echo ""."pts";//echo calculpointbonus(2,$j); ?> </div>
-			<div class="cell-classement-gde"><?php echo $paris[$parieur_id]->best_scorer; ?></div>
-			<div class="cell-classement-gde"><?php echo ""."pts"//echo calculpointbonus(1,$j); ?></div>
-		</div><!-- end div row-table -->
-	<?php } ?>
-	</div><!-- end div container-table1-->
-	
-
-	<div class="container-table2">
-		<div class="top-table gradient-greytoblack radius"><?php echo $nextGame->Type_match.": ".$nextGame->equipe1; ?> 
-			- <?php echo $nextGame->equipe2; ?></div>
-	
-		<div class='row-table'></div>
-		<div class='row-table'></div>
-		
-		<?php foreach($sortedtotalpoints as $parieur_id=>$totalpoint){ ?>
-		<div class='row-table'>
-			
-			<div class="cell-classement"><?php $rank2 +=1; echo $rank2; ?></div>
-			<div class="cell-classement-gde"><?php echo $parieurs[$parieur_id]->nom_parieur; ?></div>
-			<div class="cell-classement"><?php echo $paris[$parieur_id]->{'nb_but_e1_m'.$nextGame->id_match}; ?></div>	
-			<div class="cell-classement">-</div>
-			<div class="cell-classement"><?php echo $paris[$parieur_id]->{'nb_but_e2_m'.$nextGame->id_match} ?></div>
-		</div><!-- end div row-table -->
-		<?php } ?>
-
-
-	</div><!-- end div container-table2-->
-</div><!-- end div container-table-->	
-
-</body>
-</html>
+<table class="table">
+	<tr>
+		<td colspan="11" class="top-table gradient-greytoblack radius">Classement</td>
+		<td class="blank"></td>
+		<td colspan="5" class="top-table gradient-greytoblack radius"></td>
+	</tr>
+	<tr>
+		<td>Rank</td>
+		<td>Name</td>
+		<td>Total Pts</td>
+		<td colspan="2">Good Outcome</td>
+		<td colspan="2">Perfect Score</td>
+		<td colspan="2">Bonus</td>
+		<td colspan="2">Bonus</td>
+		<td class="blank"></td>
+		<td colspan="5"><?= $nextGame->Type_match.": ".$nextGame->equipe1.' '.$nextGame->equipe2; ?></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>#</td>
+		<td>Pts</td>
+		<td>#</td>
+		<td>Pts</td>
+		<td colspan="2">Winner</td>
+		<td colspan="2">Best Stricker</td>
+		<td class="blank"></td>
+		<td colspan="5"></td>
+	</tr>
+	<? foreach($sortedtotalpoints as $parieur_id=>$totalpoint){ ?>
+	<tr>
+		<td><? $rank +=1; echo $rank?></td>
+		<td><?= $parieurs[$parieur_id]->nom_parieur; ?></td>
+		<td><?= round($totalpoint,2)." pts"; ?></td>
+		<td><?= $csens[$parieur_id]; ?></td>
+		<td><?= $psens[$parieur_id]; ?> pts</td>
+		<td><?= $cscore[$parieur_id]; ?></td>
+		<td><?= $pscore[$parieur_id]; ?></td>
+		<td><?= $paris[$parieur_id]->winner; ?></td>
+		<td><?= ""."pts";//echo calculpointbonus(2,$j); ?></td>
+		<td><?= $paris[$parieur_id]->best_striker; ?></td>
+		<td><?= ""."pts"//echo calculpointbonus(1,$j); ?></td>
+		<td class="blank"></td>
+		<td><? $rank2 +=1; echo $rank2; ?></td>
+		<td><?= $parieurs[$parieur_id]->nom_parieur; ?></td>
+		<td><?= $paris[$parieur_id]->{'nb_but_e1_m'.$nextGame->id_match}; ?></td>
+		<td>-</td>
+		<td><?= $paris[$parieur_id]->{'nb_but_e2_m'.$nextGame->id_match} ?></td>
+	</tr>
+	<? } ?>
+</table>

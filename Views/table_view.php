@@ -32,9 +32,13 @@
 
 						<?php for ($match = $groupe->matchdebut; $match <= $groupe->matchfin; $match++){ ?>
 							<div class="row-table cfx">
-								<div class="score-match"><?php echo $paris[$id]->{'nb_but_e1_m'.$correspondance[$match]};//$nb_buts[1][$correspondance[$match]][$parieurs[$parieur]['id']] ?></div><!-- end div score match -->
-								<div class="score-match"><?php echo $paris[$id]->{'nb_but_e2_m'.$correspondance[$match]};//$nb_buts[2][$correspondance[$match]][$parieurs[$parieur]['id']] ?></div><!-- end div score match -->
-								<div class="point-match"><?php echo $points[$id][$correspondance[$match]]; ?></div><!-- end div score match -->
+								<?php if ($groupe->visible==true){ ?>
+
+								
+									<div class="score-match"><?php echo $paris[$id]->{'nb_but_e1_m'.$correspondance[$match]};//$nb_buts[1][$correspondance[$match]][$parieurs[$parieur]['id']] ?></div><!-- end div score match -->
+									<div class="score-match"><?php echo $paris[$id]->{'nb_but_e2_m'.$correspondance[$match]};//$nb_buts[2][$correspondance[$match]][$parieurs[$parieur]['id']] ?></div><!-- end div score match -->
+									<div class="point-match"><?php echo round($points[$id][$correspondance[$match]],2); ?></div><!-- end div score match -->
+								<?php } ?>
 							</div><!-- end div row-table-->
 						<?php	} ?>
 					</div><!-- end div score -->

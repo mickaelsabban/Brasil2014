@@ -1,39 +1,13 @@
-<?php
-/*session_start();
-include "Module/functioneuro2012.php";
-//recup des variables de session
-include "Module/loadsessionvars.php";
-include "Module/security.php";
+<div class="container-dropdown">
+ 	<div class="dropdown">
+		<select>
+			<?php foreach($groupes as $element){ ?>
+			<option value='<?= serialize($element)?>' <?php if($element->name ==$groupe->name){echo "selected";} ?>><?= $element->name ?></option>
 
-check_user($parieur_id);
-
-$array_phase=array(0 => "Premiere Journee",1 => "Deuxieme Journee",2 => "Troisieme Journee",3=> "Quarter Finals",4=> "Semi Finals",5=> "Finals");
-$TypeNextPhase=$array_phase[0];
-include "header.php";
-//$_POST['matchdebut'];
-
-if(!isset($_POST['matchdebut'])||!isset($_POST['matchfin'])){
-  //echo "form non set";
-  $matchdebut = 1;
-  $matchfin = $nombreMatchsPoule;
-  //$TypeNextPhase = "Premier jour";
-}else{
-  //echo "FORM SET SET  set";
-  $matchdebut = $_POST['matchdebut'];
-  $matchfin = $_POST['matchfin'];
-  //$TypeNextPhase=$_POST['typenextphase'];
-  <option value='[<?= $element->matchdebut.",".$element->matchfin ?>]'><?= $element->name ?></option>
-}*/
-?>
-
-  <div class="dropdown">
-    <select>
-      <?php foreach($groupes as $element){ ?>
-      <option value='<?= serialize($element)?>' <?php if($element->name ==$groupe->name){echo "selected";} ?>><?= $element->name ?></option>
-
-      <?php } ?>
-    </select>
-  </div>
+			<?php } ?>
+		</select>
+ 	</div><!-- end div dropdown -->
+ </div><!-- end div container dropdown -->
   <div class="containerInputProno">
   <div class="top-table radius"> <?=$parieur->nom_parieur;?>, Enter Your Simulation <? //echo $TypeNextPhase; ?></div>
   <form action="updatesimulation" method="POST" id="insert">
@@ -82,23 +56,10 @@ if(!isset($_POST['matchdebut'])||!isset($_POST['matchfin'])){
       var postData="groupe="+parsedTest;
       //console.log(postData);
       var FormData=$('#insert').serialize();
-     
-     /* $('#insert input:not([type="submit"])').each(function(){
-        mytext =mytext+"&"+this.name+"="+this.value;
-      });
-      //alert(parsedTest);
-      */
+
       $.post('updatesimulation', FormData,function(data){
         console.log(data);
       });
-      //$('#insert').submit();
-      
-      /*var input = $("<input>").attr("type", "hidden").attr("name", "nogo").val("nogo");
-      $('#insert').append($(input));
-      $('#insert').submit();
-      */
-
-      //alert( "matchdebut="+parsedTest[0]+"&matchfin="+parsedTest[1]);
       $.post('simulation', postData,function(data){
         //console.log(data);
         var content = $(data).filter('.containerInputProno');

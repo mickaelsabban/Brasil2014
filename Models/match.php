@@ -58,6 +58,7 @@ class Match_model {
 			$matchs[$row->id_match]=$match;
 		}
 		//var_dump($matchs);
+		//echo "a pres </br>";
 		return $matchs;
 	}
 
@@ -116,6 +117,7 @@ class Groupe{
 	public $name2;
 	public $matchdebut;
 	public $matchfin;
+	public $visible;
 
 	function __construct($name,$name2,$matchdebut,$matchfin){
 		$this->name=$name;
@@ -133,6 +135,7 @@ class Match{
 	public $score_e2;
 	public $Type_match;
 	public $id_match;
+	public $visible;
 
 	function __construct($ordre_affichage,$equipe1,$equipe2,$score_e1,$score_e2,$Type_match,$id_match){
 		$this->ordre_affichage=$ordre_affichage;

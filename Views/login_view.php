@@ -6,13 +6,13 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery.validate.js"></script>
-  <title>EURO 2012</title>
+  <title>Brasil 2014</title>
 </head>
 
 <body>
     
     <header>
-      <div id='wrapper'><h1>EURO 2012</h1></div>
+      <div id='wrapper'><h1>Brasil 2014</h1></div>
     </header> 
 <div id="login_container" class='cfx'>
   <?php
