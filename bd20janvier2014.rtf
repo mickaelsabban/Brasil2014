@@ -1,0 +1,426 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 -- phpMyAdmin SQL Dump\
+-- version 4.0.6\
+-- http://www.phpmyadmin.net\
+--\
+-- Host: localhost\
+-- Generation Time: Jan 21, 2014 at 03:57 AM\
+-- Server version: 5.5.33\
+-- PHP Version: 5.5.3\
+\
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";\
+SET time_zone = "+00:00";\
+\
+--\
+-- Database: `euro2012`\
+--\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `Bonus`\
+--\
+\
+CREATE TABLE `Bonus` (\
+  `Bonus_id` int(2) NOT NULL AUTO_INCREMENT,\
+  `Bonus_name` varchar(20) NOT NULL,\
+  `Bonus_result` varchar(20) NOT NULL,\
+  PRIMARY KEY (`Bonus_id`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;\
+\
+--\
+-- Dumping data for table `Bonus`\
+--\
+\
+INSERT INTO `Bonus` (`Bonus_id`, `Bonus_name`, `Bonus_result`) VALUES\
+(1, 'Winner', ''),\
+(2, 'Best_Striker', '');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `Buteurs`\
+--\
+\
+CREATE TABLE `Buteurs` (\
+  `Buteur_id` int(2) NOT NULL AUTO_INCREMENT,\
+  `Buteur_name` varchar(20) NOT NULL,\
+  PRIMARY KEY (`Buteur_id`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;\
+\
+--\
+-- Dumping data for table `Buteurs`\
+--\
+\
+INSERT INTO `Buteurs` (`Buteur_id`, `Buteur_name`) VALUES\
+(1, 'Gomez'),\
+(2, 'Van Persie'),\
+(3, 'Ronaldo'),\
+(4, 'Klose'),\
+(5, 'Benzema'),\
+(6, 'Balotelli');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `Endtimeinput`\
+--\
+\
+CREATE TABLE `Endtimeinput` (\
+  `type_match` varchar(50) NOT NULL,\
+  `end_date` date NOT NULL,\
+  `coef` float NOT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;\
+\
+--\
+-- Dumping data for table `Endtimeinput`\
+--\
+\
+INSERT INTO `Endtimeinput` (`type_match`, `end_date`, `coef`) VALUES\
+('Poule', '2013-05-06', 1),\
+('Round Sixteen', '2013-05-06', 1),\
+('Quarter Final', '2013-05-10', 1.5),\
+('Semi Final', '2013-05-14', 2),\
+('Loser Final', '2013-05-14', 2),\
+('Final', '2013-05-25', 3);\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `Equipes`\
+--\
+\
+CREATE TABLE `Equipes` (\
+  `Equipe_id` int(2) NOT NULL AUTO_INCREMENT,\
+  `Equipe Name` varchar(20) NOT NULL,\
+  PRIMARY KEY (`Equipe_id`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;\
+\
+--\
+-- Dumping data for table `Equipes`\
+--\
+\
+INSERT INTO `Equipes` (`Equipe_id`, `Equipe Name`) VALUES\
+(1, 'Brazil'),\
+(2, 'Croatia'),\
+(3, 'Mexico'),\
+(4, 'Cameroon'),\
+(5, 'Spain'),\
+(6, 'Holland'),\
+(7, 'Chile'),\
+(8, 'Australia'),\
+(9, 'Colombia'),\
+(10, 'Greece'),\
+(11, 'Ivory Coast'),\
+(12, 'Japan'),\
+(13, 'Uruguay'),\
+(14, 'Costa Rica'),\
+(15, 'England'),\
+(16, 'Italie'),\
+(17, 'Switzerland'),\
+(18, 'France'),\
+(19, 'Ecuador'),\
+(20, 'Honduras'),\
+(21, 'Argentina'),\
+(22, 'Bosnia'),\
+(23, 'Iran'),\
+(24, 'Nigeria'),\
+(25, 'Germany'),\
+(26, 'Portugal'),\
+(27, 'ghana'),\
+(28, 'USA'),\
+(29, 'Belgium'),\
+(30, 'Algeria'),\
+(31, 'Russia'),\
+(32, 'South Korea');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `matchs`\
+--\
+\
+CREATE TABLE `matchs` (\
+  `Id_match` int(2) NOT NULL AUTO_INCREMENT,\
+  `equipe_1` varchar(20) NOT NULL,\
+  `equipe_2` varchar(20) NOT NULL,\
+  `score_e1` int(2) DEFAULT NULL,\
+  `score_e2` int(2) DEFAULT NULL,\
+  `Type_match` varchar(50) NOT NULL,\
+  `Type_match2` varchar(20) NOT NULL,\
+  `ordre_affichage` int(3) NOT NULL,\
+  PRIMARY KEY (`Id_match`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;\
+\
+--\
+-- Dumping data for table `matchs`\
+--\
+\
+INSERT INTO `matchs` (`Id_match`, `equipe_1`, `equipe_2`, `score_e1`, `score_e2`, `Type_match`, `Type_match2`, `ordre_affichage`) VALUES\
+(1, 'Brazil', 'Croatia', 1, 1, 'Poule', 'A', 1),\
+(2, 'Mexico', 'Cameroon', 4, 1, 'Poule', 'A', 2),\
+(3, 'Spain', 'Holland', 0, 1, 'Poule', 'B', 7),\
+(4, 'Chile', 'Australia', 1, 0, 'Poule', 'B', 8),\
+(5, 'Colombia', 'Greece', 1, 1, 'Poule', 'C', 13),\
+(6, 'Uruguay', 'Costa Rica', 1, 1, 'Poule', 'D', 19),\
+(7, 'England', 'Italy', 2, 1, 'Poule', 'D', 20),\
+(8, 'Ivory Coast', 'Japan', 1, 3, 'Poule', 'C', 14),\
+(9, 'Swiss', 'Ecuador', 1, 2, 'Poule', 'E', 25),\
+(10, 'France', 'Honduras', 1, 1, 'Poule', 'E', 26),\
+(11, 'Argentina', 'Bosnia', 2, 3, 'Poule', 'F', 31),\
+(12, 'Germany', 'Portugal', 1, 1, 'Poule', 'G', 37),\
+(13, 'Iran', 'Nigeria', 1, 2, 'Poule', 'F', 32),\
+(14, 'Ghana', 'USA', 4, 0, 'Poule', 'G', 38),\
+(15, 'Belgium', 'Algeria', 0, 2, 'Poule', 'H', 43),\
+(16, 'Brazil', 'Mexico', 1, 0, 'Poule', 'A', 3),\
+(17, 'Russia', 'South Korea', 2, 3, 'Poule', 'H', 44),\
+(18, 'Australia', 'Holland', 2, 1, 'Poule', 'B', 9),\
+(19, 'Spain', 'Chile', 1, 2, 'Poule', 'B', 10),\
+(20, 'Cameroon', 'Croatia', 1, 0, 'Poule', 'A', 4),\
+(21, 'Colombia', 'Ivory Coast', 0, 1, 'Poule', 'C', 15),\
+(22, 'Uruguay', 'England', 1, 0, 'Poule', 'D', 21),\
+(23, 'Japan', 'Greece', 2, 0, 'Poule', 'C', 16),\
+(24, 'Italy', 'Costa Rica', 0, 0, 'Poule', 'D', 22),\
+(25, 'Switzerland', 'France', 0, 1, 'Poule', 'E', 27),\
+(26, 'Honduras', 'Ecuador', 4, 2, 'Poule', 'E', 28),\
+(27, 'Argentina', 'Iran', 2, 0, 'Poule', 'F', 33),\
+(28, 'Germany', 'Ghana', NULL, 0, 'Poule', 'G', 39),\
+(29, 'Nigeria', 'Bosnia', 0, 0, 'Poule', 'F', 34),\
+(30, 'Belgium', 'Russia', NULL, NULL, 'Poule', 'H', 45),\
+(31, 'South Korea', 'Algeria', NULL, NULL, 'Poule', 'H', 46),\
+(32, 'USA', 'Potugal', 1, 2, 'Poule', 'G', 40),\
+(33, 'Australia', 'Spain', NULL, NULL, 'Poule', 'B', 11),\
+(34, 'Holland', 'Chile', NULL, NULL, 'Poule', 'B', 12),\
+(35, 'Croatia', 'Mexico', NULL, NULL, 'Poule', 'A', 5),\
+(36, 'Cameroon', 'Brzil', NULL, NULL, 'Poule', 'A', 6),\
+(37, 'Costa Rica', 'England', NULL, NULL, 'Poule', 'D', 23),\
+(38, 'Italy', 'Uruguay', NULL, NULL, 'Poule', 'D', 24),\
+(39, 'Japan', 'Colombia', NULL, NULL, 'Poule', 'C', 17),\
+(40, 'Greece', 'Ivory Coast', NULL, NULL, 'Poule', 'C', 18),\
+(41, 'Nigeria', 'Argentina', NULL, NULL, 'Poule', 'F', 35),\
+(42, 'Bosnia', 'Iran', NULL, NULL, 'Poule', 'F', 36),\
+(43, 'Honduras', 'Switzerland', NULL, NULL, 'Poule', 'E', 29),\
+(44, 'Ecuador', 'France', NULL, NULL, 'Poule', 'E', 30),\
+(45, 'Portugal', 'Ghana', NULL, NULL, 'Poule', 'G', 41),\
+(46, 'USA', 'Germany', NULL, NULL, 'Poule', 'G', 42),\
+(47, 'South Korea', 'Belgium', NULL, NULL, 'Poule', 'H', 47),\
+(48, 'Algeria', 'Russia', NULL, NULL, 'Poule', 'H', 48);\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `Parieur`\
+--\
+\
+CREATE TABLE `Parieur` (\
+  `id_parieur` int(2) NOT NULL AUTO_INCREMENT,\
+  `nom_parieur` varchar(20) NOT NULL,\
+  `email` varchar(40) NOT NULL,\
+  `password` varchar(50) NOT NULL,\
+  PRIMARY KEY (`id_parieur`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;\
+\
+--\
+-- Dumping data for table `Parieur`\
+--\
+\
+INSERT INTO `Parieur` (`id_parieur`, `nom_parieur`, `email`, `password`) VALUES\
+(1, 'Mika', '', '$1$wrgxWXxd$SRIsY/hHD8K4JKT9GdIOE/'),\
+(2, 'Greg', '', '$1$WjuumyGD$XvufzwGXv.HBay/4MlRnj0'),\
+(3, 'Matt', '', '$1$YQkUdQnU$6B.F7ZrK/ptQ.i4xqueCJ/'),\
+(5, 'L', '', '$1$3D1FK1/L$r0Mn0DEXH8xGD7JK.tBSv0'),\
+(7, 'Boba', 'b@b.com', '$1$N1cqbEox$Z3uPcATrphTj3kUUCSo3O0'),\
+(8, 'Jj', 'n@n.com', '$1$v8Wfg7PT$Cf.bV1kM2G5h9YBQXusD..'),\
+(9, 'Mattcat', 'aaa@aaa', '$1$/bVrZ5GB$vRwNMUb7OH1uAenNVT2FW/'),\
+(10, 'Mika', 'mika@mika.com', '$1$1l6OY3DA$qgP39X1Gn/iDDgyJ2594C.'),\
+(11, 'Hh', 'hh@hh.com', '$1$fuTNK5Wp$LXgOELoUKLQt8sUFOmzWb0');\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `Paris`\
+--\
+\
+CREATE TABLE `Paris` (\
+  `parieur` int(2) NOT NULL AUTO_INCREMENT,\
+  `nb_but_e1_m1` int(2) DEFAULT NULL,\
+  `nb_but_e2_m1` int(2) DEFAULT NULL,\
+  `nb_but_e1_m2` int(2) DEFAULT NULL,\
+  `nb_but_e2_m2` int(2) DEFAULT NULL,\
+  `nb_but_e1_m3` int(2) DEFAULT NULL,\
+  `nb_but_e2_m3` int(2) DEFAULT NULL,\
+  `nb_but_e1_m4` int(2) DEFAULT NULL,\
+  `nb_but_e2_m4` int(2) DEFAULT NULL,\
+  `nb_but_e1_m5` int(2) DEFAULT NULL,\
+  `nb_but_e2_m5` int(2) DEFAULT NULL,\
+  `nb_but_e1_m6` int(2) DEFAULT NULL,\
+  `nb_but_e2_m6` int(2) DEFAULT NULL,\
+  `nb_but_e1_m7` int(2) DEFAULT NULL,\
+  `nb_but_e2_m7` int(2) DEFAULT NULL,\
+  `nb_but_e1_m8` int(2) DEFAULT NULL,\
+  `nb_but_e2_m8` int(2) DEFAULT NULL,\
+  `nb_but_e1_m9` int(2) DEFAULT NULL,\
+  `nb_but_e2_m9` int(2) DEFAULT NULL,\
+  `nb_but_e1_m10` int(2) DEFAULT NULL,\
+  `nb_but_e2_m10` int(2) DEFAULT NULL,\
+  `nb_but_e1_m11` int(2) DEFAULT NULL,\
+  `nb_but_e2_m11` int(2) DEFAULT NULL,\
+  `nb_but_e1_m12` int(2) DEFAULT NULL,\
+  `nb_but_e2_m12` int(2) DEFAULT NULL,\
+  `nb_but_e1_m13` int(2) DEFAULT NULL,\
+  `nb_but_e2_m13` int(2) DEFAULT NULL,\
+  `nb_but_e1_m14` int(2) DEFAULT NULL,\
+  `nb_but_e2_m14` int(2) DEFAULT NULL,\
+  `nb_but_e1_m15` int(2) DEFAULT NULL,\
+  `nb_but_e2_m15` int(2) DEFAULT NULL,\
+  `nb_but_e1_m16` int(2) DEFAULT NULL,\
+  `nb_but_e2_m16` int(2) DEFAULT NULL,\
+  `nb_but_e1_m17` int(2) DEFAULT NULL,\
+  `nb_but_e2_m17` int(2) DEFAULT NULL,\
+  `nb_but_e1_m18` int(2) DEFAULT NULL,\
+  `nb_but_e2_m18` int(2) DEFAULT NULL,\
+  `nb_but_e1_m19` int(2) DEFAULT NULL,\
+  `nb_but_e2_m19` int(2) DEFAULT NULL,\
+  `nb_but_e1_m20` int(2) DEFAULT NULL,\
+  `nb_but_e2_m20` int(2) DEFAULT NULL,\
+  `nb_but_e1_m21` int(2) DEFAULT NULL,\
+  `nb_but_e2_m21` int(2) DEFAULT NULL,\
+  `nb_but_e1_m22` int(2) DEFAULT NULL,\
+  `nb_but_e2_m22` int(2) DEFAULT NULL,\
+  `nb_but_e1_m23` int(2) DEFAULT NULL,\
+  `nb_but_e2_m23` int(2) DEFAULT NULL,\
+  `nb_but_e1_m24` int(2) DEFAULT NULL,\
+  `nb_but_e2_m24` int(2) DEFAULT NULL,\
+  `nb_but_e1_m25` int(2) DEFAULT NULL,\
+  `nb_but_e2_m25` int(2) DEFAULT NULL,\
+  `nb_but_e1_m26` int(2) DEFAULT NULL,\
+  `nb_but_e2_m26` int(2) DEFAULT NULL,\
+  `nb_but_e1_m27` int(2) DEFAULT NULL,\
+  `nb_but_e2_m27` int(2) DEFAULT NULL,\
+  `nb_but_e1_m28` int(2) DEFAULT NULL,\
+  `nb_but_e2_m28` int(2) DEFAULT NULL,\
+  `nb_but_e1_m29` int(2) DEFAULT NULL,\
+  `nb_but_e2_m29` int(2) DEFAULT NULL,\
+  `nb_but_e1_m30` int(2) DEFAULT NULL,\
+  `nb_but_e2_m30` int(2) DEFAULT NULL,\
+  `nb_but_e1_m31` int(2) DEFAULT NULL,\
+  `nb_but_e2_m31` int(2) DEFAULT NULL,\
+  `nb_but_e1_m32` int(2) DEFAULT NULL,\
+  `nb_but_e2_m32` int(2) DEFAULT NULL,\
+  `winner` varchar(20) DEFAULT NULL,\
+  `best_scorer` varchar(30) DEFAULT NULL,\
+  PRIMARY KEY (`parieur`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;\
+\
+--\
+-- Dumping data for table `Paris`\
+--\
+\
+INSERT INTO `Paris` (`parieur`, `nb_but_e1_m1`, `nb_but_e2_m1`, `nb_but_e1_m2`, `nb_but_e2_m2`, `nb_but_e1_m3`, `nb_but_e2_m3`, `nb_but_e1_m4`, `nb_but_e2_m4`, `nb_but_e1_m5`, `nb_but_e2_m5`, `nb_but_e1_m6`, `nb_but_e2_m6`, `nb_but_e1_m7`, `nb_but_e2_m7`, `nb_but_e1_m8`, `nb_but_e2_m8`, `nb_but_e1_m9`, `nb_but_e2_m9`, `nb_but_e1_m10`, `nb_but_e2_m10`, `nb_but_e1_m11`, `nb_but_e2_m11`, `nb_but_e1_m12`, `nb_but_e2_m12`, `nb_but_e1_m13`, `nb_but_e2_m13`, `nb_but_e1_m14`, `nb_but_e2_m14`, `nb_but_e1_m15`, `nb_but_e2_m15`, `nb_but_e1_m16`, `nb_but_e2_m16`, `nb_but_e1_m17`, `nb_but_e2_m17`, `nb_but_e1_m18`, `nb_but_e2_m18`, `nb_but_e1_m19`, `nb_but_e2_m19`, `nb_but_e1_m20`, `nb_but_e2_m20`, `nb_but_e1_m21`, `nb_but_e2_m21`, `nb_but_e1_m22`, `nb_but_e2_m22`, `nb_but_e1_m23`, `nb_but_e2_m23`, `nb_but_e1_m24`, `nb_but_e2_m24`, `nb_but_e1_m25`, `nb_but_e2_m25`, `nb_but_e1_m26`, `nb_but_e2_m26`, `nb_but_e1_m27`, `nb_but_e2_m27`, `nb_but_e1_m28`, `nb_but_e2_m28`, `nb_but_e1_m29`, `nb_but_e2_m29`, `nb_but_e1_m30`, `nb_but_e2_m30`, `nb_but_e1_m31`, `nb_but_e2_m31`, `nb_but_e1_m32`, `nb_but_e2_m32`, `winner`, `best_scorer`) VALUES\
+(1, 1, 1, 0, 2, 3, 1, 2, 0, 2, 0, 0, 1, 1, 1, 1, 2, 0, 2, 1, 0, 0, 1, 1, 1, 2, 1, 3, 0, 1, 3, 2, 3, 0, 2, 1, 1, 2, 1, 0, 2, 1, 1, 2, 1, 1, 0, 0, 0, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 'Allemagne', ''),\
+(2, 2, 0, 3, 0, 3, 1, 3, 2, 1, 0, 0, 1, 2, 1, 0, 0, 1, 1, 2, 2, 1, 3, 3, 3, 1, 0, 4, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 2, 0, 3, 0, 3, 1, 0, 1, 1, 0, 2, 1, 2, 2, 0, 2, 1, 1, 1, 1, 2, 2, 1, NULL, NULL, NULL, NULL, 'Allemagne', 'Van Persie'),\
+(3, 1, 1, 2, 0, 2, 0, 3, 1, 2, 1, 0, 0, 3, 0, 1, 1, 1, 0, 1, 1, 0, 1, 2, 2, 1, 0, 2, 0, 0, 3, 0, 1, 0, 1, 2, 0, 1, 3, 0, 2, 0, 2, 1, 0, 1, 1, 0, 3, 0, 2, 2, 0, 1, 1, 2, 1, 1, 3, 3, 1, NULL, NULL, NULL, NULL, 'Espagne', 'Torres'),\
+(5, 1, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 2, 2, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, 'Allemagne', 'Balotelli'),\
+(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(8, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Table structure for table `ParisTemp`\
+--\
+\
+CREATE TABLE `ParisTemp` (\
+  `parieur` int(2) NOT NULL AUTO_INCREMENT,\
+  `nb_but_e1_m1` int(2) DEFAULT NULL,\
+  `nb_but_e2_m1` int(2) DEFAULT NULL,\
+  `nb_but_e1_m2` int(2) DEFAULT NULL,\
+  `nb_but_e2_m2` int(2) DEFAULT NULL,\
+  `nb_but_e1_m3` int(2) DEFAULT NULL,\
+  `nb_but_e2_m3` int(2) DEFAULT NULL,\
+  `nb_but_e1_m4` int(2) DEFAULT NULL,\
+  `nb_but_e2_m4` int(2) DEFAULT NULL,\
+  `nb_but_e1_m5` int(2) DEFAULT NULL,\
+  `nb_but_e2_m5` int(2) DEFAULT NULL,\
+  `nb_but_e1_m6` int(2) DEFAULT NULL,\
+  `nb_but_e2_m6` int(2) DEFAULT NULL,\
+  `nb_but_e1_m7` int(2) DEFAULT NULL,\
+  `nb_but_e2_m7` int(2) DEFAULT NULL,\
+  `nb_but_e1_m8` int(2) DEFAULT NULL,\
+  `nb_but_e2_m8` int(2) DEFAULT NULL,\
+  `nb_but_e1_m9` int(2) DEFAULT NULL,\
+  `nb_but_e2_m9` int(2) DEFAULT NULL,\
+  `nb_but_e1_m10` int(2) DEFAULT NULL,\
+  `nb_but_e2_m10` int(2) DEFAULT NULL,\
+  `nb_but_e1_m11` int(2) DEFAULT NULL,\
+  `nb_but_e2_m11` int(2) DEFAULT NULL,\
+  `nb_but_e1_m12` int(2) DEFAULT NULL,\
+  `nb_but_e2_m12` int(2) DEFAULT NULL,\
+  `nb_but_e1_m13` int(2) DEFAULT NULL,\
+  `nb_but_e2_m13` int(2) DEFAULT NULL,\
+  `nb_but_e1_m14` int(2) DEFAULT NULL,\
+  `nb_but_e2_m14` int(2) DEFAULT NULL,\
+  `nb_but_e1_m15` int(2) DEFAULT NULL,\
+  `nb_but_e2_m15` int(2) DEFAULT NULL,\
+  `nb_but_e1_m16` int(2) DEFAULT NULL,\
+  `nb_but_e2_m16` int(2) DEFAULT NULL,\
+  `nb_but_e1_m17` int(2) DEFAULT NULL,\
+  `nb_but_e2_m17` int(2) DEFAULT NULL,\
+  `nb_but_e1_m18` int(2) DEFAULT NULL,\
+  `nb_but_e2_m18` int(2) DEFAULT NULL,\
+  `nb_but_e1_m19` int(2) DEFAULT NULL,\
+  `nb_but_e2_m19` int(2) DEFAULT NULL,\
+  `nb_but_e1_m20` int(2) DEFAULT NULL,\
+  `nb_but_e2_m20` int(2) DEFAULT NULL,\
+  `nb_but_e1_m21` int(2) DEFAULT NULL,\
+  `nb_but_e2_m21` int(2) DEFAULT NULL,\
+  `nb_but_e1_m22` int(2) DEFAULT NULL,\
+  `nb_but_e2_m22` int(2) DEFAULT NULL,\
+  `nb_but_e1_m23` int(2) DEFAULT NULL,\
+  `nb_but_e2_m23` int(2) DEFAULT NULL,\
+  `nb_but_e1_m24` int(2) DEFAULT NULL,\
+  `nb_but_e2_m24` int(2) DEFAULT NULL,\
+  `nb_but_e1_m25` int(2) DEFAULT NULL,\
+  `nb_but_e2_m25` int(2) DEFAULT NULL,\
+  `nb_but_e1_m26` int(2) DEFAULT NULL,\
+  `nb_but_e2_m26` int(2) DEFAULT NULL,\
+  `nb_but_e1_m27` int(2) DEFAULT NULL,\
+  `nb_but_e2_m27` int(2) DEFAULT NULL,\
+  `nb_but_e1_m28` int(2) DEFAULT NULL,\
+  `nb_but_e2_m28` int(2) DEFAULT NULL,\
+  `nb_but_e1_m29` int(2) DEFAULT NULL,\
+  `nb_but_e2_m29` int(2) DEFAULT NULL,\
+  `nb_but_e1_m30` int(2) DEFAULT NULL,\
+  `nb_but_e2_m30` int(2) DEFAULT NULL,\
+  `nb_but_e1_m31` int(2) DEFAULT NULL,\
+  `nb_but_e2_m31` int(2) DEFAULT NULL,\
+  `nb_but_e1_m32` int(2) DEFAULT NULL,\
+  `nb_but_e2_m32` int(2) DEFAULT NULL,\
+  `winner` varchar(20) DEFAULT NULL,\
+  `best_scorer` varchar(30) DEFAULT NULL,\
+  PRIMARY KEY (`parieur`)\
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;\
+\
+--\
+-- Dumping data for table `ParisTemp`\
+--\
+\
+INSERT INTO `ParisTemp` (`parieur`, `nb_but_e1_m1`, `nb_but_e2_m1`, `nb_but_e1_m2`, `nb_but_e2_m2`, `nb_but_e1_m3`, `nb_but_e2_m3`, `nb_but_e1_m4`, `nb_but_e2_m4`, `nb_but_e1_m5`, `nb_but_e2_m5`, `nb_but_e1_m6`, `nb_but_e2_m6`, `nb_but_e1_m7`, `nb_but_e2_m7`, `nb_but_e1_m8`, `nb_but_e2_m8`, `nb_but_e1_m9`, `nb_but_e2_m9`, `nb_but_e1_m10`, `nb_but_e2_m10`, `nb_but_e1_m11`, `nb_but_e2_m11`, `nb_but_e1_m12`, `nb_but_e2_m12`, `nb_but_e1_m13`, `nb_but_e2_m13`, `nb_but_e1_m14`, `nb_but_e2_m14`, `nb_but_e1_m15`, `nb_but_e2_m15`, `nb_but_e1_m16`, `nb_but_e2_m16`, `nb_but_e1_m17`, `nb_but_e2_m17`, `nb_but_e1_m18`, `nb_but_e2_m18`, `nb_but_e1_m19`, `nb_but_e2_m19`, `nb_but_e1_m20`, `nb_but_e2_m20`, `nb_but_e1_m21`, `nb_but_e2_m21`, `nb_but_e1_m22`, `nb_but_e2_m22`, `nb_but_e1_m23`, `nb_but_e2_m23`, `nb_but_e1_m24`, `nb_but_e2_m24`, `nb_but_e1_m25`, `nb_but_e2_m25`, `nb_but_e1_m26`, `nb_but_e2_m26`, `nb_but_e1_m27`, `nb_but_e2_m27`, `nb_but_e1_m28`, `nb_but_e2_m28`, `nb_but_e1_m29`, `nb_but_e2_m29`, `nb_but_e1_m30`, `nb_but_e2_m30`, `nb_but_e1_m31`, `nb_but_e2_m31`, `nb_but_e1_m32`, `nb_but_e2_m32`, `winner`, `best_scorer`) VALUES\
+(1, 1, 1, 0, 2, 3, 1, 2, 0, 2, 0, 0, 1, 1, 1, 1, 2, 0, 2, 1, 0, 0, 1, 1, 1, 2, 1, 3, 0, 1, 3, 2, 3, 0, 2, 1, 1, 2, 1, 0, 2, 1, 1, 2, 1, 1, 0, 0, 0, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, NULL, NULL, 'Allemagne', ''),\
+(2, 2, 0, 3, 0, 3, 1, 3, 2, 1, 0, 0, 1, 2, 1, 0, 0, 1, 1, 2, 2, 1, 3, 3, 3, 1, 0, 4, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 2, 0, 3, 0, 3, 1, 0, 1, 1, 0, 2, 1, 2, 2, 0, 2, 1, 1, 1, 1, 2, 2, 1, NULL, NULL, NULL, NULL, 'Allemagne', 'Van Persie'),\
+(3, 1, 1, 2, 0, 2, 0, 3, 1, 2, 1, 0, 0, 3, 0, 1, 1, 1, 0, 1, 1, 0, 1, 2, 2, 1, 0, 2, 0, 0, 3, 0, 1, 0, 1, 2, 0, 1, 3, 0, 2, 0, 2, 1, 0, 1, 1, 0, 3, 0, 2, 2, 0, 1, 1, 2, 1, 1, 3, 3, 1, NULL, NULL, NULL, NULL, 'Espagne', 'Torres'),\
+(5, 1, 1, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 3, 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, 'Allemagne', 'Balotelli'),\
+(7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),\
+(11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);\
+}
