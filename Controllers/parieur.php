@@ -4,7 +4,7 @@ include_once ("Models/parieur.php");
 include_once ("Models/match.php");
 include_once ("Models/paris.php");
 //include_once ("Controllers/security.php");
-//include "pronostic2.php";
+// include "pronostic2.php";
 //header('Content-type:text/plain');
 class Parieur {
 
@@ -23,17 +23,21 @@ class Parieur {
 		$this->m_model= new Match_model();
 		$this->paris_model= new Paris_model();
 		switch ($page){
-			case"":
+
 			case "delete":
 				$this->deleteView();
 				break;
 			case "input":
 				$this->inputView();
 				break;
+			case"":
 			case "login":
 				$this->view();
 			case "logout":
 				$this->logout();
+				break;
+			case "main":
+				$this->mainView();
 				break;
 			case "ranking":
 				$this->classementView();
@@ -177,7 +181,7 @@ class Parieur {
 
 	function getGroupes(){
 		$groupes = $this->m_model->getGroupes();
-		
+
 		//Set the visible attribute for groupes
 		$today_date=date("Y-m-d-H:i");
 		$today_timestamp=strtotime($today_date);
@@ -207,8 +211,8 @@ class Parieur {
 			var_dump($_SESSION['matchs']);
 		}
 		$matchs = unserialize($_SESSION['matchs']);
-		$pari = $this->paris_model->getParisbyParieur($_SESSION['Id_parieur']);		
-		$parieur =  $this->p_model->getParieurInfobyID($_SESSION['Id_parieur']); 
+		$pari = $this->paris_model->getParisbyParieur($_SESSION['Id_parieur']);
+		$parieur =  $this->p_model->getParieurInfobyID($_SESSION['Id_parieur']);
 		//var_dump($parieur->nom_parieur);
 		date_default_timezone_set('America/New_York');
 		$today_date=date("Y-m-d H:i");
@@ -257,12 +261,12 @@ class Parieur {
 				$this->$key = $value;
 			}
 			$_SESSION['Id_parieur']=$this->id_parieur;
-			header('Location: table');
+			header('Location: main');
 		}else{
 			$message = "please check password";
 			$this->view("login",$message);
 		}
-		
+
 		//var_dump($existing_parieur);
 	}
 
@@ -270,6 +274,32 @@ class Parieur {
 		session_destroy();
 		header('Location: login');
 		exit();
+	}
+
+	function mainView(){
+		$this->checkLoggedIn();
+		//echo "tavle prono global";
+		//echo "classement=>".$_SESSION['Id_parieur'];
+
+		$parieurs = $this->p_model->getParieurs();
+		//$parieursTranspose = $this->p_model->parieurTranspose($parieurs);
+		$NombreParieurs=$this->p_model->getNombreParieurs();
+		$groupes = $this->getGroupes();
+		$matchs = $this->getMatchs();
+		$correspondance = $this->m_model->getCorrespondances();
+		$paris = $this->paris_model->getParis();
+		$points = $this->paris_model->calculate_points($paris,$matchs,true);
+		$sortedtotalpoints = $this->paris_model->calculateTotalPoints($points);
+		//echo"la";
+		list($csens,$psens,$cscore,$pscore)=$this->paris_model->countBonSensScore($paris,$matchs);
+		$nextGame=$this->m_model->getNextMatch();
+		//var_dump($nextGame);
+
+		include "Views/header.php";
+		include "Views/main_view.php";
+		include "Views/footer.php";
+		exit();
+
 	}
 
 	function parieurexist($name){
@@ -285,6 +315,7 @@ class Parieur {
 	}
 
 	function rulesView(){
+		$this->checkLoggedIn();
 		include "Views/header.php";
 		include "Views/rules_view.php";
 		exit();
@@ -298,10 +329,13 @@ class Parieur {
 		//var_dump($matchs);
 		$nextGame=$this->m_model->getNextMatch();
 		$TypeNextPhase = $nextGame->Type_match;
+		// $TypeNextPhase = "Round of 16";
 		$groupes = $this->m_model->getGroupes("Large");
-		//var_dump($groupes);
+		// var_dump($groupes);
 		if (isset($_POST['groupe'])){
+			//var_dump($groupe);
 			$groupe = unserialize(stripcslashes($_POST['groupe']));
+			//var_dump($groupe);
 			if($groupe->name == "Group"){
 				$nombreMatchsPoule = $groupe->matchfin - $groupe->matchdebut+1;
 			}
@@ -309,7 +343,7 @@ class Parieur {
 			foreach ( $groupes as $element ) {
 				if($element->name == "Group"){
 					$nombreMatchsPoule = $element->matchfin - $element->matchdebut+1;
-				}	
+				}
 		        if ( $TypeNextPhase == $element->name ) {
 		            //echo $element->name;
 		            $groupe = $element;
@@ -319,8 +353,8 @@ class Parieur {
 		}
 
 	    //var_dump($matchdebut);
-		//$pari = $this->paris_model->getParisbyParieur($_SESSION['Id_parieur']);		
-		$parieur =  $this->p_model->getParieurInfobyID($_SESSION['Id_parieur']); 
+		//$pari = $this->paris_model->getParisbyParieur($_SESSION['Id_parieur']);
+		$parieur =  $this->p_model->getParieurInfobyID($_SESSION['Id_parieur']);
 
 
 		include "Views/header.php";
@@ -328,7 +362,7 @@ class Parieur {
 		exit();
 	}
 
-	function statView(){	
+	function statView(){
 		$this->checkLoggedIn();
 		$matchs = $this->getMatchs();
 		$parieurs = $this->p_model->getParieurs();
@@ -337,7 +371,7 @@ class Parieur {
 			//$nextGame = $matchs[1];
 		}else{
 			$nextGame=$this->m_model->getNextMatch();
-			//$nextGame = $matchs[3];	
+			//$nextGame = $matchs[3];
 		}
 		$thisparieurID=$_SESSION['Id_parieur'];
 		$NombreParieurs=$this->p_model->getNombreParieurs();
@@ -367,20 +401,20 @@ class Parieur {
 		//var_dump($_SESSION['matchs']);
 		$matchs = $this->getMatchs();
 		//$match=$matchs[1];
-		
+
 		//var_dump($match->equipe1);
 		//var_dump($matchs);
 		$correspondance = $this->m_model->getCorrespondances();
 		$paris = $this->paris_model->getParis();
 		$points = $this->paris_model->calculate_points($paris,$matchs,true);
-		
+
 
 
 		//$equipe=1;$match=5;
 		//var_dump($parieurs);
 		//var_dump($groupes);
 		//var_dump($paris[0]->{'nb_but_e'.$equipe."_m".$match});
-		
+
 		include "Views/header.php";
 		include "Views/table_view.php";
 		exit();
@@ -397,24 +431,29 @@ class Parieur {
 	}
 
 	function updateSimulation(){
-		$matchs = unserialize($_SESSION['matchs']);
-		//var_dump($matchs);
-		//var_dump($_POST);
-		for($match = $_POST['matchdebut'];$match<=$_POST['matchfin'];$match++){
-			$matchs[$match]->score_e1=intval($_POST['score_e1_m'.$match]);
-			$matchs[$match]->score_e2=intval($_POST['score_e2_m'.$match]);
+		if($_POST['action']=="Envoyer"){
+			$matchs = unserialize($_SESSION['matchs']);
+			//var_dump($matchs);
+			//var_dump($_POST);
+			for($match = $_POST['matchdebut'];$match<=$_POST['matchfin'];$match++){
+				$matchs[$match]->score_e1=intval($_POST['score_e1_m'.$match]);
+				$matchs[$match]->score_e2=intval($_POST['score_e2_m'.$match]);
+			}
+			$_SESSION['matchs']=serialize($matchs);
+			//var_dump($matchs);
+			header('Location: table');
+		}elseif($_POST['action']=="Reset"){
+			unset($_SESSION['matchs']);
+			header('Location: table');
 		}
-		$_SESSION['matchs']=serialize($matchs);
-		//var_dump($matchs);
-		header('Location: table');
 	}
 
 	function validate($name,$email,$password,$repassword){
 
 		//echo "validate all \n";
-		
+
 		//$new_parieur = new Parieur();
-		
+
 		$result_validate_name=$this->validate_name($name);
 		//var_dump($result_validate_name);
 		if($result_validate_name === "error 201"){
@@ -446,7 +485,7 @@ class Parieur {
 			header('Location: table');
 		}else{
 			echo"je devrais jamais etre ici validate else \n";
-		}	
+		}
 	}
 
 	function validate_name($name){
@@ -491,7 +530,7 @@ class Parieur {
 		//echo"validate password \n";
 		$p1 =trim($password);
 		$p2 =trim($repassword);
-		
+
 		//var_dump ($this->$email);
 		//var_dump ($temp_email);
 		//$this->name=ucfirst(filter_var($name,FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_LOW));
@@ -505,16 +544,16 @@ class Parieur {
 	}
 	function view($page="login",$message=""){
 		$name=$this->nom_parieur;
-		$email=$this->email;		
+		$email=$this->email;
 		include "Views/".$page."_view.php";
 		exit();
 	}
-	
 
-	
 
-	
-	
+
+
+
+
 
 
 }

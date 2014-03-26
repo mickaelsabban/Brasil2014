@@ -25,8 +25,8 @@ class Paris_model {
  		$this->coefdemi=3;
  		$this->coefpetitefinale=3;
  		$this->coeffinale=4;
- 		$this->pointsensparmatch=10;
- 		$this->pointscoreparmatch=0;
+ 		$this->pointsensparmatch=20;
+ 		$this->pointscoreparmatch=2;
  		//$this->pointbonscore=4;
  	}
 
@@ -59,22 +59,22 @@ class Paris_model {
 		return $bonus;
 	}
 
-function getTeams(){
- 		$query = "SELECT * FROM Equipes";
-		$stmt=$this->connection->query($query);
-		while ($row=$stmt->fetch(PDO::FETCH_OBJ)){
-			$teams[$row->Equipe_id]=$row;
-		}
-		return $teams;
+	function getTeams(){
+	 		$query = "SELECT * FROM Equipes";
+			$stmt=$this->connection->query($query);
+			while ($row=$stmt->fetch(PDO::FETCH_OBJ)){
+				$teams[$row->Equipe_id]=$row;
+			}
+			return $teams;
 	}
 
-function getStrikers(){
- 		$query = "SELECT * FROM Buteurs";
-		$stmt=$this->connection->query($query);
-		while ($row=$stmt->fetch(PDO::FETCH_OBJ)){
-			$strikers[$row->Buteur_id]=$row;
-		}
-		return $strikers;
+	function getStrikers(){
+	 		$query = "SELECT * FROM Buteurs";
+			$stmt=$this->connection->query($query);
+			while ($row=$stmt->fetch(PDO::FETCH_OBJ)){
+				$strikers[$row->Buteur_id]=$row;
+			}
+			return $strikers;
 	}
 
 	function getParisTemp(){
@@ -212,7 +212,7 @@ function getStrikers(){
 		}else{
 			if ($pari_e1==$score_e1 && $pari_e2==$score_e2){
 					//echo "la pt ".$this->pointscoreparmatch." count ".$countBonScore." coef ".$coef[$Type_match]." typematch ".$Type_match;
-					$result = $this->pointscoreparmatch/$countBonScore*$coef[$Type_match];
+					$result = $this->pointscoreparmatch*$coef[$Type_match];	 // /$countBonScore; le nombre de points bonus ne depend pas du nombre de joueurs
 					//echo"</br>";
 			}
 			if (($pari_e1>$pari_e2 && $score_e1>$score_e2) || ($pari_e1==$pari_e2 && $score_e1==$score_e2) ||
@@ -285,7 +285,7 @@ function getStrikers(){
 						}
 						if(($pari_e1==$score_e1) && ($pari_e2==$score_e2)){
 							$cscore +=1; 
-							$pscore+=$this->pointscoreparmatch/$countBonScore*$coef[$Type_match]; 
+							$pscore+=$this->pointscoreparmatch*$coef[$Type_match] ; // /$countBonScore; 
 						}
 					}
 				}

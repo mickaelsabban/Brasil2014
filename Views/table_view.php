@@ -1,51 +1,63 @@
-<div id='container-prono' class='cfx'>
-	<div id="container-groupes" class='cfx'>			
-		<?php foreach ($groupes as $groupe) { ?>
-			<div class='groupe cfx'>
-				<div class="top-table radius gradient-greytoblack"><?php echo $groupe->name." ".$groupe->name2 ?></div><!-- end div top-table-->
-				<div class="row-table">Resultats</div><!-- end div row-table -->
+<div id="content-fix">
+	<table class='table container-groupes'>
+		<? foreach ($groupes as $groupe) { ?>
+			
+			<thead>
+				<tr></tr>
+				<tr>
+					<td class='top-table gradient-greytoblack radius' colspan="5"><? echo $groupe->name." ".$groupe->name2 ?></td>
+				</tr>
+				<tr class="blue-row"> 
+					<td colspan="5"> Resultats </td>
+				</tr>
+			</thead>
+			<? for ($match = $groupe->matchdebut; $match <= $groupe->matchfin; $match++){ ?>
+			<tr>
+				<td><?php echo $matchs[$correspondance[$match]]->equipe1 ?></td>
+				<td><? echo $matchs[$correspondance[$match]]->score_e1 ?></td>
+				<td>:</td>
+				<td><? echo $matchs[$correspondance[$match]]->score_e2 ?></td>
+				<td><? echo $matchs[$correspondance[$match]]->equipe2 ?></td>
+			</tr>
+			<? }?>
+			<tr class="blank"><td class="blank"></td>
+			</tr>
 
-				<?php
-				for ($match = $groupe->matchdebut; $match <= $groupe->matchfin; $match++){ ?>
-				<div class="row-table cfx">
-					<div class='country'><?php echo $matchs[$correspondance[$match]]->equipe1 ?></div><!-- end div country-->
-					<div class="score-match"><?php echo $matchs[$correspondance[$match]]->score_e1 ?></div><!-- end div score match-->
-					<div class="score-match">:</div><!-- end div score match-->
-					<div class="score-match"><?php echo $matchs[$correspondance[$match]]->score_e2 ?></div><!-- end div score match-->
-					<div class='country'><?php echo $matchs[$correspondance[$match]]->equipe2 ?></div><!-- end div country-->
-				</div><!-- end div row-table-->
-				<?php } ?>			
-			</div><!-- end div groupe -->
-		<?php } ?>
-	</div> <!-- end div container groupes -->
-	<div id="container_scores" class='cfx'>
-		<?php foreach ($groupes as $groupe) { ?>
-			<div class="container-score-par-groupe">
-				<?php foreach ($parieurs as $id=>$parieur){ ?>
-					<div class="score">
-						<div class="top-table"><?php echo $parieur->nom_parieur; ?></div><!-- end div top-table-->
-						<div class="row-table cfx">
-							<div class="score-match">E1</div><!-- end div score match -->
-							<div class="score-match">E2</div><!-- end div score match -->
-							<div class="point-match">Pts</div><!-- end div score match -->
-						</div><!-- end div row-table-->
+		<? } ?>
+	</table>
 
-						<?php for ($match = $groupe->matchdebut; $match <= $groupe->matchfin; $match++){ ?>
-							<div class="row-table cfx">
-								<?php if ($groupe->visible==true){ ?>
+	<div class="container_scores">
+		<? foreach ($parieurs as $id=>$parieur){ ?>
+			<table class="table score">
+				<? foreach ($groupes as $groupe) { ?>
+					<tr></tr>
+					<tr>
+						<td class="top-table radius" colspan="3"><? echo $parieur->nom_parieur; ?></td>
+					</tr>
+					<tr>
+						<td>E1</td>
+						<td>E2</td>
+						<td>Pts</td>
+					</tr>
+					<? for ($match = $groupe->matchdebut; $match <= $groupe->matchfin; $match++){ ?>
+						<tr>
+							<? if ($groupe->visible==true){ ?>
+								<td><?php echo (isset($paris[$id]->{'nb_but_e1_m'.$correspondance[$match]}) ? $paris[$id]->{'nb_but_e1_m'.$correspondance[$match]} : "") ;?></td>
+								<td><?php echo (isset($paris[$id]->{'nb_but_e2_m'.$correspondance[$match]}) ? $paris[$id]->{'nb_but_e2_m'.$correspondance[$match]} : "") ;?></td>
+								<td><?php echo round($points[$id][$correspondance[$match]],2); ?></td>
+							<? }else{ ?>
+								<td><?php echo " ";?></td>
+								<td><?php echo " ";?></td>
+								<td><?php echo 0; ?></td>
+							<? } ?>
+						</tr>
+					<? } ?>	
+					<tr class="blank"><td class="blank"></td>
+					</tr>	
+				<? } ?>
+			</table>	
+		<? } ?>
+	</div>
+</div>
 
-								
-									<div class="score-match"><?php echo $paris[$id]->{'nb_but_e1_m'.$correspondance[$match]};//$nb_buts[1][$correspondance[$match]][$parieurs[$parieur]['id']] ?></div><!-- end div score match -->
-									<div class="score-match"><?php echo $paris[$id]->{'nb_but_e2_m'.$correspondance[$match]};//$nb_buts[2][$correspondance[$match]][$parieurs[$parieur]['id']] ?></div><!-- end div score match -->
-									<div class="point-match"><?php echo round($points[$id][$correspondance[$match]],2); ?></div><!-- end div score match -->
-								<?php } ?>
-							</div><!-- end div row-table-->
-						<?php	} ?>
-					</div><!-- end div score -->
-				<?php } ?>
-			</div><!-- end div container-score-par-groupe -->
-		<?php } ?>
-	</div> <!-- end div container-scores -->
-</div> <!-- end div container-prono -->
-</body>
-</html>
+

@@ -15,7 +15,7 @@
 try{
 	$db = new PDO('mysql:host=localhost;dbname=Brasil2014;charset=utf8', 'root', 'root');
 	// PROD
-	//$db = new PDO('mysql:host=localhost;dbname=leasabba_euro2012;charset=utf8', 'leasabba', 'facilemika55');
+	//$db = new PDO('mysql:host=localhost;dbname=leasabba_Brasil2014;charset=utf8', 'leasabba', 'facilemika55');
 	// Easyphp
 
 	//$db = new PDO('mysql:host=127.0.0.1;dbname=Brasil2014;charset=utf8', 'root', '');

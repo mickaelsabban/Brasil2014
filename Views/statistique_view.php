@@ -1,86 +1,74 @@
 <div class="container-dropdown">
- <div class="dropdown match">
-    <select>
-      <?php foreach($matchs as $match){ ?>
-      <option value='<?= $match->id_match?>' <?php if($match->id_match == $nextGame->id_match){echo "selected";} ?>><?= $match->id_match.". ".$match->equipe1." - ".$match->equipe2; ?></option>
+	<div class="dropdown match">
+		<select>
+		<?php foreach($matchs as $match){ ?>
+			<? if ($match->visible) { ?>
+				<option value='<?= $match->id_match?>' <?php if($match->id_match == $nextGame->id_match){echo "selected";} ?>><?= $match->id_match.". ".$match->equipe1." - ".$match->equipe2; ?></option>
+			<? } ?>
+		<? } ?>
+		</select>
+	</div>
+	<div class="dropdown parieur">
+		<select>
+		<?php foreach($parieurs as $parieur){ ?>
+			<option value='<?= $parieur->id_parieur?>' <?php if($parieur->id_parieur == $thisparieurID){echo "selected";} ?>>Prono de <?= $parieur->nom_parieur ?></option>
 
-      <?php } ?>
-    </select>
-  </div>
-   <div class="dropdown parieur">
-    <select>
-      <?php foreach($parieurs as $parieur){ ?>
-      <option value='<?= $parieur->id_parieur?>' <?php if($parieur->id_parieur == $thisparieurID){echo "selected";} ?>>Prono de <?= $parieur->nom_parieur ?></option>
-
-      <?php } ?>
-    </select>
-  </div>
- </div><!-- end divcontainer dropdown -->
-
-<div id="chartdiv" style="width:600px; height:400px;">
-
-</div><!-- end div pie -->
-
-
-<div class="container-table">
-	<div id="equipetest">test equipe</div>
- 	<div class="container-table-stat">
-		<div class="top-table gradient-greytoblack radius4" ><div id="equipe1"><?= $nextGame->equipe1 ?></div><?= ": "?><div class="count1"><?= $count1; ?></div><?= " ; ".round(100*$count1/$NombreParieurs,2)."%"; ?>
-		</div>
-		
-		<div class="top-table gradient-greytoblack radius" >
-			<div class="cell-stat">score</div>
-			<div class="cell-stat">#</div>
-			<div class="cell-stat">%</div>
-		</div><!-- end div row table-->
-		<?php foreach ($state1 as $stat){ ?>
-			<div class="row-table">
-			<div class="cell-stat"><?=$stat->score_e1."-".$stat->score_e2 ?></div>
-			<div class="cell-stat"><?= $stat->nb ?></div>
-			<div class="cell-stat"><?= round($stat->nb/$NombreParieurs*100,2); ?></div>
-		</div><!-- end div row table-->
 		<?php } ?>
-	</div><!-- end div container-table-stat-->
-	
+		</select>
+	</div>
+</div><!-- end divcontainer dropdown -->
 
- 	<div class="container-table-stat">
-		<div class="top-table gradient-greytoblack radius4 " ><?= "Draw : "?><span id="countN"><?=$countN ;?></span> <?=round(100*$countN/$NombreParieurs,2)."%"; ?></div>
+<!--<div id="chartdiv" style="width:600px; height:400px;"> chart div??
 
-		<div class="top-table gradient-greytoblack radius" >
-			<div class="cell-stat">score</div>
-			<div class="cell-stat">#</div>
-			<div class="cell-stat">%</div>
-		</div><!-- end div row table-->
-		<?php foreach ($statdraw as $stat){ ?>
-		<div class="row-table">
-			<div class="cell-stat"><?=$stat->score_e1."-".$stat->score_e2 ?></div>
-			<div class="cell-stat"><?= $stat->nb ?></div>
-			<div class="cell-stat"><?= round($stat->nb/$NombreParieurs*100,2); ?></div>
-		</div><!-- end div row table-->
-		<?php } ?>
+</div> end div pie -->
 
-	</div><!-- end div container-table-stat-->
+<table class="table container-table">
+	<thead>
+		<tr>
+			<td colspan="3" class="top-table gradient-greytoblack radius"><?= $nextGame->equipe1." : ". $count1." ; ".round(100*$count1/$NombreParieurs,2)."%";?></td>
+			<td class="blank"></td>
+			<td colspan="3" class="top-table gradient-greytoblack radius"><?= "Draw : ".$countN." ; ".round(100*$countN/$NombreParieurs,2)."%"; ?></td>
+			<td class="blank"></td>
+			<td colspan="3" class="top-table gradient-greytoblack radius"><?= $nextGame->equipe2." : ". $count2." ; ".round(100*$count2/$NombreParieurs,2)."%";?></td>
+		</tr>
+		<tr></tr>
+		<tr class="blue-row">
+			<td>Score</td>
+			<td>#</td>
+			<td>%</td>
+			<td class="blank"></td>
+			<td>Score</td>
+			<td>#</td>
+			<td>%</td>
+			<td class="blank"></td>
+			<td>Score</td>
+			<td>#</td>
+			<td>%</td>
+		<tr>
+	</thead>
+	<tbody>
+		<?php for ($i = 0; $i<=8 ;$i++){ ?>
+		<tr>
+			<td><?= $state1[$i]->score_e1."-".$state1[$i]->score_e2; ?></td>
+			<td><?= $state1[$i]->nb ;?></td>
+			<td><?= round($state1[$i]->nb/$NombreParieurs*100,2); ?></td>
+			<td class="blank"></td>
+			<td><?= (isset($statdraw[$i]->score_e1) ? $statdraw[$i]->score_e1."-".$statdraw[$i]->score_e2 : ""); ?></td>
+			<td><?= (isset($statdraw[$i]->score_e1) ? $statdraw[$i]->nb : "" ); ?></td>
+			<td><?= (isset($statdraw[$i]->score_e1) ? round($statdraw[$i]->nb/$NombreParieurs*100,2): "" ); ?></td>
+			<td class="blank"></td>
+			<td><?= $state2[$i]->score_e1."-".$state2[$i]->score_e2; ?></td>
+			<td><?= $state2[$i]->nb ;?></td>
+			<td><?= round($state2[$i]->nb/$NombreParieurs*100,2); ?></td>
+		</tr>
 
-	<div class="container-table-stat">
-		<div class="top-table gradient-greytoblack radius4" ><span id="equipe2"><?= $nextGame->equipe2 ?></span><?= ": "?><span id="count1"><?= $count2; ?></span><?= " ; ".round(100*$count1/$NombreParieurs,2)."%"; ?></div>
+		<? } ?>
 
-		<div class="top-table gradient-greytoblack radius" >
-			<div class="cell-stat">score</div>
-			<div class="cell-stat">#</div>
-			<div class="cell-stat">%</div>
-		</div><!-- end div row table-->
-		<?php foreach ($state2 as $stat){ ?>
-		<div class="row-table">
-			<div class="cell-stat"><?=$stat->score_e1."-".$stat->score_e2 ?></div>
-			<div class="cell-stat"><?= $stat->nb ?></div>
-			<div class="cell-stat"><?= round($stat->nb/$NombreParieurs*100,2); ?></div>
-		</div><!-- end div row table-->
-		<?php } ?>
+	</tbody>
+</table>
 
-	</div><!-- end div container-table-stat-->
 
-	
-</div><!-- end div container-table-->	
+
 <script type="text/javascript">
 
   $(document).ready(function(){
@@ -93,12 +81,12 @@
 		
 		$.post('stat', postData,function(data){
 	        
-	        var $content = $(data).filter('#equipetest');
+	        var $content = $(data).find('.container-table');
 	        console.log($content.html());
 
 	        //console.log(content);
 			$(".container-table").fadeOut('200',function(){
-			//	$(".container-table").html(content.html());
+				$(".container-table").html($content.html());
 				//$("#chartdiv").html(pie.html());
 				onSelectChangedParieur();
 				//RunAmCharts();
@@ -106,7 +94,6 @@
 				})
 			})
 		})
-
 	}
 	$('.parieur select:not(.bound)').addClass('bound').bind('change',  onSelectChangedParieur);
 	onSelectChangedParieur();
@@ -123,13 +110,14 @@
 		var pari_e2 = pari[aux2];
 		var testif=pari_e1+"-"+pari_e2;
 		console.log(testif);
-		$(".cell-stat").each(function(){
+		$("td").each(function(){
 			if($(this).text()==testif){
 				console.log('rentre');
-				$(this).parent().addClass('highlighted');
+				$(this).addClass('highlighted');
+				$(this).next().addClass('highlighted');
+				$(this).next().next().addClass('highlighted');
 			}
 		})
-
 	}
 
 

@@ -11,7 +11,8 @@
 
      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
      <script src="js/amcharts/amcharts.js" type="text/javascript"></script>
-      <script src="js/amcharts/pie.js" type="text/javascript"></script>
+     <script src="js/amcharts/pie.js" type="text/javascript"></script>
+     <script src="js/onload.js" type="text/javascript"></script>
      
 </head>
 
@@ -19,9 +20,10 @@
 	<div id="wrapper">
 		<header>
 			<div id="lookup"><a href="logout" >Lookup</a></div>
-			<h1>Brasil 2014</h1>
+			<h1>Brazil 2014</h1>
 			<nav>
 				<ul>
+					<li><a href="main">Main</a></li>
 					<li><a href="rules">Rules</a></li>
 					<li><a href="ranking">Ranking</a></li>
 					<li><a href="table">Table</a></li>
@@ -29,7 +31,7 @@
 					<li><a href="stat">Stats</a></li>
 					<li><a href="input">Input Prono</a></li>
 					<? //if($parieur_id==1){?>
-					<li><a href="delete">Admin</a></li>
+					<!--<li><a href="delete">Admin</a></li>-->
 					<?//}?>
 				</ul>
 			</nav>

@@ -33,11 +33,11 @@
       </div><!-- end div input line -->
       <div class="input-line">
         <label for="cname">NickName</label>
-        <input type="text" size=40 id="cname" class="required" minlength="2" name="name" value=<?=$name?>>
+        <input type="text" size=40 id="cname" class="required" minlength="2" name="name" value=<?= $name ?>>
       </div><!-- end div input line -->
       <div class="input-line">
         <label for="cemail">email</label>
-        <input type="text" id="cemail" name="email" size="25"  class="required email" value=<?=$email?>>
+        <input type="text" id="cemail" name="email" size="25"  class="required email" value=<?= $email ?>>
       </div><!-- end div input line -->
 
       <div class="input-line">

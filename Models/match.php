@@ -62,6 +62,10 @@ class Match_model {
 		return $matchs;
 	}
 
+	function setMatchs(){
+		$query = "UPDATE Matchs SET " ;
+	}
+
 	function getNextMatch(){
 		//echo"debut22 ";
 		$query = "SELECT ordre_affichage,equipe_1,equipe_2,score_e1,score_e2,Type_match,id_match  FROM matchs Where score_e1 IS NULL LIMIT 1";

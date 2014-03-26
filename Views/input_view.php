@@ -1,5 +1,5 @@
       <div class="containerInputProno">
-      <div class="top-table radius"> <?=$parieur->nom_parieur;?>, Input your prono for <?= $TypeNextPhase ?></div>
+      <div class="top-table radius"><?= $parieur->nom_parieur;?>, Input your prono for <?= $TypeNextPhase ?></div>
       <form action="update" method="POST" id="insert" name="update">
             <div class="BlockProno">
                   <div class="input-line">
